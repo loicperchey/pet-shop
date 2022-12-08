@@ -17,7 +17,6 @@ export class PetComponent implements OnInit {
 
   onSelectPet(petId: number): void {
     this.selectedPet = this.pets.find((pet) => pet.id === petId);
-    console.log(this.selectedPet);
   }
 
   private createPets(): void {

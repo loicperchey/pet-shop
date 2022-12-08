@@ -3,5 +3,5 @@
     [petList]="pets"
     (selectPet)="onSelectPet($event)"
   ></app-pet-list>
-  <app-pet-detail></app-pet-detail>
+  <app-pet-detail [pet]="selectedPet"></app-pet-detail>
 </div>
