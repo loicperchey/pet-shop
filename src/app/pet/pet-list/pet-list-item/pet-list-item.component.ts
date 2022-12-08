@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { IPet } from '../../model/pet';
 
 @Component({
   selector: 'app-pet-list-item',
   templateUrl: './pet-list-item.component.html',
-  styleUrls: ['./pet-list-item.component.scss']
+  styleUrls: ['./pet-list-item.component.scss'],
 })
 export class PetListItemComponent implements OnInit {
+  @Input() pet!: IPet;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -12,7 +12,5 @@ export class PetListComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.petList);
-  }
+  ngOnInit(): void {}
 }
