@@ -5,7 +5,7 @@
       <h2>{{ pet.species }}</h2>
     </div>
     <p class="price">{{ pet.price }} €</p>
-    <p class="{{ pet.isAvailable ? 'available' : 'sold' }}">
+    <p [class]="pet.isAvailable ? 'available' : 'sold'">
       {{ pet.isAvailable ? "Disponible" : "Vendu" }}
     </p>
   </div>
