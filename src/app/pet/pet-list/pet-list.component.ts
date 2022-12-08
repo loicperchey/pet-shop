@@ -13,4 +13,8 @@ export class PetListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClickPet(id: number): void {
+    console.log(id);
+  }
 }
