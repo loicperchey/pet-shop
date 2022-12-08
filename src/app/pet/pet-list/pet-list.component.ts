@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { IPet } from '../model/pet';
 
@@ -9,12 +9,13 @@ import { IPet } from '../model/pet';
 })
 export class PetListComponent implements OnInit {
   @Input() petList: IPet[] = [];
+  @Output() selectPet = new EventEmitter<number>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   onClickPet(id: number): void {
-    console.log(id);
+    this.selectPet.emit(id);
   }
 }

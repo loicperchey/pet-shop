@@ -1,4 +1,7 @@
 <div class="pet">
-  <app-pet-list [petList]="pets"></app-pet-list>
+  <app-pet-list
+    [petList]="pets"
+    (selectPet)="onSelectPet($event)"
+  ></app-pet-list>
   <app-pet-detail></app-pet-detail>
 </div>
