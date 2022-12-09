@@ -19,7 +19,11 @@ export class PetService {
   }
 
   selectPet(petId: number): void {
-    this.selectedPet = this.pets.find((pet) => pet.id === petId);
+    if (this.selectedPet?.id === petId) {
+      this.selectedPet = null;
+    } else {
+      this.selectedPet = this.pets.find((pet) => pet.id === petId);
+    }
   }
 
   createPet(
