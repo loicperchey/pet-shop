@@ -10,6 +10,12 @@
     flex-direction: column;
     justify-content: space-around;
 
+    img {
+      max-height: 50%;
+      max-width: 50%;
+      margin: auto;
+    }
+
     .price {
       font-size: 200%;
     }
