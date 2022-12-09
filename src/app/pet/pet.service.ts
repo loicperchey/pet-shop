@@ -8,9 +8,14 @@ import { IPet, Species } from './model/pet';
 export class PetService {
   pets: IPet[] = [];
   selectedPet: IPet | undefined | null = null;
+  isCreatingPet: boolean = false;
 
   constructor() {
     this.createPets();
+  }
+
+  togglePetCreation(): void {
+    this.isCreatingPet = !this.isCreatingPet;
   }
 
   selectPet(petId: number): void {
