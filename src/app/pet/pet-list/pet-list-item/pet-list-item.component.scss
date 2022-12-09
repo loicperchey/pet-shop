@@ -6,7 +6,7 @@
   text-align: center;
   cursor: pointer;
 
-  &:hover {
+  &:hover, &.selected {
     background-color: blueviolet;
     color: white;
   }
