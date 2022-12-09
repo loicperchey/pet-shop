@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { IPet } from '../../model/pet';
 
@@ -7,10 +7,8 @@ import { IPet } from '../../model/pet';
   templateUrl: './pet-list-item.component.html',
   styleUrls: ['./pet-list-item.component.scss'],
 })
-export class PetListItemComponent implements OnInit {
+export class PetListItemComponent {
   @Input() pet!: IPet;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

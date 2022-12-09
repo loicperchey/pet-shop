@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { IPet } from '../model/pet';
+import { PetService } from '../pet.service';
 
 @Component({
   selector: 'app-pet-list',
@@ -8,14 +9,15 @@ import { IPet } from '../model/pet';
   styleUrls: ['./pet-list.component.scss'],
 })
 export class PetListComponent implements OnInit {
-  @Input() petList: IPet[] = [];
-  @Output() selectPet = new EventEmitter<number>();
+  constructor(private petService: PetService) {}
 
-  constructor() {}
+  get petList(): IPet[] {
+    return this.petService.pets;
+  }
 
   ngOnInit(): void {}
 
   onClickPet(id: number): void {
-    this.selectPet.emit(id);
+    this.petService.selectPet(id);
   }
 }
