@@ -22,6 +22,29 @@ export class PetService {
     this.selectedPet = this.pets.find((pet) => pet.id === petId);
   }
 
+  createPet(
+    name: string,
+    species: Species,
+    price: number,
+    isAvailable: boolean,
+    imageUrl: string
+  ): void {
+    const maxId = Math.max(...this.pets.map((pet) => pet.id));
+
+    const pet: IPet = {
+      id: maxId + 1,
+      name,
+      species,
+      price,
+      isAvailable,
+      imageUrl,
+    };
+
+    this.pets.push(pet);
+
+    this.isCreatingPet = false;
+  }
+
   private createPets(): void {
     const names: string[] = ['milou', 'garfield', 'nemo', 'bugs bunny'];
     const species: Species[] = ['chien', 'chat', 'poisson', 'lapin'];
