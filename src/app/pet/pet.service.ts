@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 
 import { IPet, Species } from './model/pet';
 
@@ -6,19 +8,21 @@ import { IPet, Species } from './model/pet';
   providedIn: 'root',
 })
 export class PetService {
+  private petsUrl =
+    'https://formation-6e588-default-rtdb.europe-west1.firebasedatabase.app/pets.json';
   pets: IPet[] = [];
   selectedPet: IPet | undefined | null = null;
   isCreatingPet: boolean = false;
 
-  constructor() {
-    this.createPets();
+  constructor(private http: HttpClient) {
+    this.getPets();
   }
 
   togglePetCreation(): void {
     this.isCreatingPet = !this.isCreatingPet;
   }
 
-  selectPet(petId: number): void {
+  selectPet(petId: string): void {
     if (this.selectedPet?.id === petId) {
       this.selectedPet = null;
     } else {
@@ -26,51 +30,53 @@ export class PetService {
     }
   }
 
-  createPet(
-    name: string,
-    species: Species,
-    price: number,
-    isAvailable: boolean,
-    imageUrl: string
-  ): void {
-    const maxId = Math.max(...this.pets.map((pet) => pet.id));
+  // createPet(
+  //   name: string,
+  //   species: Species,
+  //   price: number,
+  //   isAvailable: boolean,
+  //   imageUrl: string
+  // ): void {
 
-    const pet: IPet = {
-      id: maxId + 1,
-      name,
-      species,
-      price,
-      isAvailable,
-      imageUrl,
-    };
+  //   const pet: IPet = {
+  //     id: maxId + 1,
+  //     name,
+  //     species,
+  //     price,
+  //     isAvailable,
+  //     imageUrl,
+  //   };
 
-    this.pets.push(pet);
+  //   this.pets.push(pet);
 
-    this.isCreatingPet = false;
-  }
+  //   this.isCreatingPet = false;
+  // }
 
-  private createPets(): void {
-    const names: string[] = ['milou', 'garfield', 'nemo', 'bugs bunny'];
-    const species: Species[] = ['chien', 'chat', 'poisson', 'lapin'];
-    const prices: number[] = [500, 400, 10, 50];
-    const imageUrls: string[] = [
-      'https://cdn001.tintin.com/public/tintin/img/static/milou/milou_v3.png',
-      'https://upload.wikimedia.org/wikipedia/en/thumb/b/bc/Garfield_the_Cat.svg/1200px-Garfield_the_Cat.svg.png',
-      'https://easydrawingguides.com/wp-content/uploads/2017/05/How-to-Draw-Nemo-20.png',
-      'https://img.src.ca/2015/07/27/1250x703/150727_co2q2_aetd_bugs-bunny_sn1250.jpg',
-    ];
+  getPets(): void {
+    this.http
+      .get(this.petsUrl)
+      .pipe(
+        map((res: any) => {
+          const pets: IPet[] = [];
 
-    for (let i = 0; i < 4; i++) {
-      const pet: IPet = {
-        id: i + 1,
-        name: names[i],
-        species: species[i],
-        price: prices[i],
-        isAvailable: i % 2 === 0,
-        imageUrl: imageUrls[i],
-      };
+          for (const key in res) {
+            const pet: IPet = {
+              id: key,
+              // ...res[key],
+              name: res[key].name,
+              isAvailable: res[key].isAvailable,
+              imageUrl: res[key].imageUrl,
+              price: res[key].price,
+              species: res[key].species,
+            };
+            pets.push(pet);
+          }
 
-      this.pets.push(pet);
-    }
+          return pets;
+        })
+      )
+      .subscribe((res: IPet[]) => {
+        this.pets = res;
+      });
   }
 }
