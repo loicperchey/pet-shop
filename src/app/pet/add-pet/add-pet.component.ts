@@ -23,13 +23,7 @@ export class AddPetComponent {
 
   onSubmit() {
     if (this.petForm.valid) {
-      // this.petService.createPet(
-      //   this.petForm.value.name,
-      //   this.petForm.value.species,
-      //   this.petForm.value.price,
-      //   this.petForm.value.isAvailable,
-      //   this.petForm.value.imageUrl
-      // );
+      this.petService.createPet(this.petForm.value);
     }
   }
 }

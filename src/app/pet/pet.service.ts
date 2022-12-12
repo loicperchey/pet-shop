@@ -30,27 +30,13 @@ export class PetService {
     }
   }
 
-  // createPet(
-  //   name: string,
-  //   species: Species,
-  //   price: number,
-  //   isAvailable: boolean,
-  //   imageUrl: string
-  // ): void {
+  createPet(petToCreate: any): void {
+    this.http.post(this.petsUrl, petToCreate).subscribe(() => {
+      this.getPets();
+    });
 
-  //   const pet: IPet = {
-  //     id: maxId + 1,
-  //     name,
-  //     species,
-  //     price,
-  //     isAvailable,
-  //     imageUrl,
-  //   };
-
-  //   this.pets.push(pet);
-
-  //   this.isCreatingPet = false;
-  // }
+    this.isCreatingPet = false;
+  }
 
   getPets(): void {
     this.http
