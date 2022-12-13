@@ -6,6 +6,21 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0 20px;
+  gap: 20px;
+
+  a {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: yellow;
+    }
+
+    &.active {
+      color: yellow;
+      font-weight: bold;
+    }
+  }
 
   button {
     border: none;
