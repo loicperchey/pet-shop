@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+import { ConfirmBeforeLeavingGuard } from './confirm-before-leaving.guard';
 
 import { HomeComponent } from './home/home.component';
 import { AddPetComponent } from './pet/add-pet/add-pet.component';
@@ -12,13 +14,18 @@ const routes: Routes = [
   {
     path: 'pet',
     component: PetComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'index',
         component: PetIndexComponent,
         children: [{ path: ':id', component: PetDetailComponent }],
       },
-      { path: 'add', component: AddPetComponent },
+      {
+        path: 'add',
+        component: AddPetComponent,
+        canDeactivate: [ConfirmBeforeLeavingGuard],
+      },
       { path: '', pathMatch: 'full', redirectTo: 'index' },
       { path: '**', redirectTo: 'index' },
     ],
