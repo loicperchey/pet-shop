@@ -1,4 +1,7 @@
-<form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="add-pet">
+<div class="add-pet">
+
+<button [routerLink]="['..', 'index']">Retour à la liste</button>
+<form [formGroup]="petForm" (ngSubmit)="onSubmit()">
   <input type="text" formControlName="name" placeholder="Nom" />
 
   <select formControlName="species">
@@ -16,3 +19,4 @@
 
   <button [disabled]="petForm.invalid">Créer mon Animal</button>
 </form>
+</div>

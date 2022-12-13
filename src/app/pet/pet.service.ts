@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 
-import { IPet, Species } from './model/pet';
+import { IPet } from './model/pet';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +13,9 @@ export class PetService {
     'https://formation-6e588-default-rtdb.europe-west1.firebasedatabase.app/pets.json';
   pets: IPet[] = [];
   selectedPet: IPet | undefined | null = null;
-  isCreatingPet: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.getPets();
-  }
-
-  togglePetCreation(): void {
-    this.isCreatingPet = !this.isCreatingPet;
   }
 
   selectPet(petId: string): void {
@@ -33,9 +29,8 @@ export class PetService {
   createPet(petToCreate: any): void {
     this.http.post(this.petsUrl, petToCreate).subscribe(() => {
       this.getPets();
+      this.router.navigate(['pet', 'index']);
     });
-
-    this.isCreatingPet = false;
   }
 
   getPets(): void {
