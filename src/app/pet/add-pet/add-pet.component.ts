@@ -22,8 +22,9 @@ export class AddPetComponent {
   constructor(private fb: FormBuilder, private petService: PetService) {}
 
   onSubmit() {
-    if (this.petForm.valid) {
-      this.petService.createPet(this.petForm.value);
-    }
+    console.log('COUCOU GÉGÉ')
+    // if (this.petForm.valid) {
+    //   this.petService.createPet(this.petForm.value);
+    // }
   }
 }
