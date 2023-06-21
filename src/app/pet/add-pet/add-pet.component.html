@@ -2,26 +2,54 @@
   <button [routerLink]="['..', 'index']" class="btn-nav">
     Retour à la liste
   </button>
+
   <form [formGroup]="petForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="name" placeholder="Nom" />
-
-    <select formControlName="species">
-      <option *ngFor="let spec of species" [value]="spec">{{ spec }}</option>
-    </select>
-
-    <input type="number" formControlName="price" placeholder="Prix" />
-
-    <div>
-      <input id="availability" type="checkbox" formControlName="isAvailable" />
-      <label for="availability">Disponible</label>
+    <div class="mb-3">
+      <label for="nameInput" class="form-label">Nom</label>
+      <input
+        id="nameInput"
+        type="text"
+        formControlName="name"
+        class="form-control"
+      />
     </div>
-
-    <input
-      type="text"
-      formControlName="imageUrl"
-      placeholder="URL de l'image"
-    />
-
-    <button [disabled]="petForm.invalid">Créer mon Animal</button>
+    <div class="mb-3">
+      <label for="speciesSelect" class="form-label">Espèce</label>
+      <select id="speciesSelect" formControlName="species" class="form-select">
+        <option *ngFor="let spec of species" [value]="spec">{{ spec }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="priceInput" class="form-label">Prix</label>
+      <input
+        id="priceInput"
+        type="number"
+        formControlName="price"
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3 form-check">
+      <div>
+        <input
+          id="availability"
+          type="checkbox"
+          formControlName="isAvailable"
+          class="form-check-input"
+        />
+        <label class="form-check-label" for="availability">Disponible</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="imgInput" class="form-label">URL de l'image</label>
+      <input
+        id="imgInput"
+        type="text"
+        formControlName="imageUrl"
+        class="form-control"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="petForm.invalid">
+      Créer mon animal
+    </button>
   </form>
 </div>

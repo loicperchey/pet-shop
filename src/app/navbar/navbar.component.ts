@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -8,9 +9,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  get isAuth(): boolean {
-    return this.authService.isAuth;
-  }
+  isAuth$: Observable<boolean> = this.authService.isAuth$.asObservable();
 
   constructor(private authService: AuthService) {}
 
